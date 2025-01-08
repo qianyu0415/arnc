@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: auto;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+            align-self: flex-start;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%; 
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5c6bc0;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; 
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3f51b5;
+        }
+
+        .image-container {
+            width: 300px; 
+            height: 200px; 
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            border: 1px dashed #ffffff;
+        }
+
+        #image-preview {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Image for Processing</h2>
+        <form action="/process-image" method="post" enctype="multipart/form-data">
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image" required onchange="updateImagePreview();">
+            <div class="image-container" id="preview-container">
+                <img id="image-preview" alt="Image preview will display here after selecting a file.">
+            </div>
+            
+            <!-- Remaining form elements -->
+            <!-- ... -->
+            <label for="point_coords">Point Coords (comma-separated, e.g., x,y):</label>
+            <input type="text" name="point_coords" id="point_coords" required>
+            <label for="point_labels">Point Labels (comma-separated):</label>
+            <input type="text" name="point_labels" id="point_labels" required>
+            <label for="sam_model_type">SAM Model Type:</label>
+            <input type="text" name="sam_model_type" id="sam_model_type" required>
+            <label for="sam_ckpt_path">SAM Checkpoint Path:</label>
+            <input type="text" name="sam_ckpt_path" id="sam_ckpt_path" required value="./pretrained_models/sam_vit_h_4b8939.pth">
+            <label for="lama_config_path">LaMa Config Path:</label>
+            <input type="text" name="lama_config_path" id="lama_config_path" required value="./lama/configs/prediction/default.yaml">
+            <label for="lama_ckpt_path">LaMa Checkpoint Path:</label>
+            <input type="text" name="lama_ckpt_path" id="lama_ckpt_path" required value="./pretrained_models/big-lama">
+            <input type="submit" value="Process Image">
+        </form>
+    </div>
+
+    <script>
+        function updateImagePreview() {
+            var container = document.getElementById('preview-container');
+            var preview = document.getElementById('image-preview');
+            var file = document.getElementById('image').files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                container.style.display = 'flex'; 
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                container.style.display = 'none'; 
+            }
+        }
+    </script>
+</body>
+</html>
+

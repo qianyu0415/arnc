@@ -1,0 +1,9 @@
+本文件夹为flask应用的根目录文件夹，主要用于存放全部flask应用需要的后端代码和AIGC模型检查点文件。
+__pycache__文件夹主要用于存储部分运行过程中的缓存内容。
+arnc文件夹存放了flask应用下的flsak代码各部分内容
+models目录下则存放了flask应用所使用的全部AIGC模型相关代码和预训练模型
+app.py主要用于在开发过程中，使用flask内嵌的后端服务器开辟后端服务
+requirement.txt记录了环境所需要的全部包关系，可以使用pip install -r requirement.py完成虚拟环境的构建
+gunicorn_config.py则主要用于在生成环境中作为gunicorn服务器的配置文件，配置文件中规定了gunicorn的gpu分配资源规则和线程数、超时限制等基本配置。
+开发环境启动指令：python app.py
+生产环境启动指令：gunicorn -c gunicorn_config.py arnc:app

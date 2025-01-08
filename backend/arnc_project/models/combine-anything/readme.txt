@@ -1,0 +1,7 @@
+本文件夹中主要存放了时光绘卷模块中的部分模块代码。
+add_background_cv.py使用opencv为渲染的每一帧3D模型图像添加背景，
+add_background_pil.py使用pillow库完成背景的添加
+在古韵新章项目中主要使用了opencv完成该模块功能
+blender_script.py则是一个调用blender完成3D模型逐帧渲染的脚本
+convert.py对3D模型文件进行格式转换，将其从glb转换为更为容易读取处理的gltf
+render_script.py是前期开发过程中用于测试blender_script.py脚本的代码

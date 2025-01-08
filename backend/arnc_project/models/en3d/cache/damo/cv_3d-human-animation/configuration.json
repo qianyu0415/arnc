@@ -1,0 +1,7 @@
+{
+   "framework": "pytorch",
+   "task": "human3d-animation",
+    "pipeline": {
+       "type": "human3d-animation"
+    }
+}
