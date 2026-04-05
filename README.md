@@ -1,4 +1,4 @@
-# arnc
+# arnc（Ancient Rhythm, New Chapter）
 中国大学生计算机设计大赛软件应用赛道国一项目。项目名称“古韵新章——3D国画创作平台”。
 
 ### 界面设计
